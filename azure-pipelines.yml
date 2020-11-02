@@ -7,8 +7,8 @@ trigger:
 - master
 
 pool:
-  # vmImage: 'windows-latest'
-  Self Hosted
+  vmImage: 'windows-latest'
+  # Self Hosted
 
 variables:
   solution: '**/*.sln'
@@ -21,6 +21,10 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
+- task: CmdLine@2
+  inputs:
+    script: 'nuget install NUnit3TestAdapter'
 
 - task: VSBuild@1
   inputs:
