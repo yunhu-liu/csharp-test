@@ -1,7 +1,9 @@
 ﻿using KiwiSaverCalculatorTesting.Pages;
 using KiwiSaverCalculatorTesting.Utils;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,9 @@ using System.Threading;
 
 namespace KiwiSaverCalculatorTesting.Tests
 {
-    class CalculationKiwiSaverRetirementBalanceTest: BasePage
+    [TestFixture(typeof(ChromeDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
+    class CalculationKiwiSaverRetirementBalanceTest<TWebDriver> : BasePage where TWebDriver: IWebDriver, new()
     {
         CalculatorHomePage calculatorHomePage = new CalculatorHomePage();
         EmployedCalculatorPage employedCalculatorPage = new EmployedCalculatorPage();
@@ -21,7 +25,7 @@ namespace KiwiSaverCalculatorTesting.Tests
         [SetUp]
         public void Setup()
         {
-            Driver = new ChromeDriver();
+            Driver = new TWebDriver();
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl($"{baseUrl}/kiwisaver/calculators/kiwisaver-calculator/");
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);

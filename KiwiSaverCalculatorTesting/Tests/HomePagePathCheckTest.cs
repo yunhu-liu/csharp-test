@@ -1,18 +1,22 @@
 using KiwiSaverCalculatorTesting.Pages;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
 
 namespace KiwiSaverCalculatorTesting
 {
-    public class HomePagePathCheckTest: BasePage
+    [TestFixture(typeof(ChromeDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
+    public class HomePagePathCheckTest<TWebDriver> : BasePage where TWebDriver : IWebDriver, new()
     {
         [SetUp]
         public void Setup()
         {
-            Driver = new ChromeDriver();
+            Driver = new TWebDriver();
             Driver.Manage().Window.Maximize();
             Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
