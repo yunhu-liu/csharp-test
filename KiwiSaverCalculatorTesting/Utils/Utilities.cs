@@ -19,8 +19,6 @@ namespace KiwiSaverCalculatorTesting.Utils
         {
             // Create output directory of screenshots
             string path = @"..\..\..\Screenshots\";
-            Console.WriteLine("Environment current path: " + Environment.CurrentDirectory);
-            Console.WriteLine("Current path: " + Directory.GetCurrentDirectory());
 
             try
             {
