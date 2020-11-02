@@ -22,22 +22,24 @@ namespace KiwiSaverCalculatorTesting
         [Test]
         public void PathCheck()
         {
-            HomePage homePage = new HomePage();
-            homePage.EleKiwiSaver.Click();
+            UITest(() =>
+            {
+                HomePage homePage = new HomePage();
+                homePage.EleKiwiSaver.Click();
 
-            var wait1 = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-            wait1.Until(driver => homePage.EleRiskProfileRetirementCalculatorIcon.Displayed);
+                var wait1 = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+                wait1.Until(driver => homePage.EleRiskProfileRetirementCalculatorIcon.Displayed);
 
-            Assert.That(homePage.EleMenuTitle.Displayed, Is.True, "The element of Risk profile and retirement calculator is not found");
+                Assert.That(homePage.EleMenuTitle.Displayed, Is.True, "The element of Risk profile and retirement calculator is not found");
 
-            homePage.EleRiskProfileRetirementCalculatorIcon.Click();
+                homePage.EleRiskProfileRetirementCalculatorIcon.Click();
 
-            Assert.That(homePage.EleKiwiSaverRetirementCalculator.Displayed, Is.True, "The element of KiwiSaver Retirement Calculator is not found");
+                Assert.That(homePage.EleKiwiSaverRetirementCalculator.Displayed, Is.True, "The element of KiwiSaver Retirement Calculator is not found");
 
-            homePage.EleKiwiSaverRetirementCalculator.Click();
+                homePage.EleKiwiSaverRetirementCalculator.Click();
 
-            Assert.That(Driver.Url, Is.EqualTo("https://www.westpac.co.nz/kiwisaver/calculators/kiwisaver-calculator/"), "The url is not the expected url");
-
+                Assert.That(Driver.Url, Is.EqualTo("https://www.westpac.co.nz/kiwisaver/calculators/kiwisaver-calculator/"), "The url is not the expected url");
+            });
         }
 
         [TearDown]
